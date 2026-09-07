@@ -1,0 +1,605 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,top=22mm,bottom=22mm,left=24mm,right=24mm,
+  headheight=24pt,headsep=8mm,footskip=12mm]{geometry}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{CJKutf8}
+  \let\Bbbk\relax
+  \usepackage{newtxtext,newtxmath}
+\else
+  \usepackage{fontspec}
+  \usepackage{xeCJK}
+  \setmainfont{TeX Gyre Termes}
+\fi
+
+\usepackage[final]{microtype}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\setstretch{1.12}
+\raggedbottom
+\setlength{\emergencystretch}{3em}
+
+\let\Bbbk\relax
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{siunitx}
+\sisetup{detect-all,group-minimum-digits=4,per-mode=symbol}
+\usepackage{booktabs,array,tabularx,longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{needspace}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
+\usepackage[dvipsnames]{xcolor}
+
+\definecolor{DeepBlue}{HTML}{1A2B4C}
+\definecolor{SlateGray}{HTML}{4A5568}
+\definecolor{AccentBlue}{HTML}{2B6CB0}
+\definecolor{PaleBlue}{HTML}{EBF4FF}
+\definecolor{RuleGray}{HTML}{CBD5E0}
+\definecolor{CodeBackground}{HTML}{F7FAFC}
+\definecolor{CodeKeyword}{HTML}{2B6CB0}
+\definecolor{CodeComment}{HTML}{718096}
+\definecolor{CodeString}{HTML}{2F855A}
+
+\newcommand{\StudentName}{罗钟杰}
+\newcommand{\StudentID}{24020007086}
+\newcommand{\Programme}{系统开发工具基础}
+\newcommand{\Institution}{中国海洋大学}
+\newcommand{\InstructorName}{周小伟}
+\newcommand{\ReportDate}{2026年9月7日}
+\newcommand{\LabDate}{2026年9月7日}
+\newcommand{\RepositoryURL}{https://github.com/luojierochester/System-Dev-Tools-Week3}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{DeepBlue}}
+  {\thesection.}{0.65em}{}
+  [\vspace{0.35em}\color{AccentBlue}\titlerule]
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{DeepBlue}}
+  {\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{SlateGray}}
+  {\thesubsubsection}{0.55em}{}
+\titlespacing*{\section}{0pt}{1.7em}{0.95em}
+\titlespacing*{\subsection}{0pt}{1.35em}{0.55em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.4em}
+
+\setlist[itemize]{leftmargin=1.45em,itemsep=0.28em,topsep=0.45em}
+\setlist[enumerate]{leftmargin=1.65em,itemsep=0.28em,topsep=0.45em}
+
+\lstdefinestyle{cleanconsole}{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{white},
+  frame=single,
+  rulecolor=\color{RuleGray},
+  framerule=0.45pt,
+  framesep=7pt,
+  xleftmargin=0.4em,
+  xrightmargin=0.4em,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  keywordstyle=\bfseries\color{CodeKeyword},
+  commentstyle=\itshape\color{CodeComment},
+  stringstyle=\color{CodeString}
+}
+\lstset{style=cleanconsole}
+\DefineVerbatimEnvironment{CodeBlock}{Verbatim}{
+  fontsize=\small,
+  frame=single,
+  framesep=3mm,
+  rulecolor=\color{RuleGray},
+  formatcom=\color{DeepBlue}
+}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\renewcommand{\lstlistingname}{代码清单}
+
+\newtcolorbox{infobar}{
+  enhanced,breakable,colback=PaleBlue!62,colframe=AccentBlue!35,
+  boxrule=0.6pt,arc=2.5mm,left=4mm,right=4mm,top=3.5mm,bottom=3.5mm
+}
+\newtcolorbox{resultbox}[1][执行结果]{
+  enhanced,breakable,title=#1,
+  coltitle=DeepBlue,fonttitle=\bfseries\sffamily,
+  colback=white,colframe=RuleGray,
+  boxrule=0.5pt,arc=1.7mm,
+  borderline west={2.2pt}{0pt}{AccentBlue},
+  left=4mm,right=4mm,top=2.5mm,bottom=2.8mm
+}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{%
+  \makebox[\headwidth][c]{%
+    \parbox[b]{0.64\headwidth}{\raggedright\small\sffamily\color{DeepBlue}
+      系统开发工具基础——第3周实验报告}%
+    \parbox[b]{0.36\headwidth}{\raggedleft\small\sffamily\color{SlateGray}
+      \StudentName\quad|\quad\StudentID}%
+  }%
+}
+\fancyfoot[C]{%
+  \makebox[\headwidth][c]{%
+    \parbox[t]{0.36\headwidth}{\raggedright\footnotesize\sffamily\color{SlateGray}
+      \Institution}%
+    \parbox[t]{0.28\headwidth}{\centering\footnotesize\sffamily\color{SlateGray}
+      第\,\thepage\,页，共\,\pageref*{LastPage}\,页}%
+    \parbox[t]{0.36\headwidth}{\raggedleft\footnotesize\sffamily\color{SlateGray}
+      \ReportDate}%
+  }%
+}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{AccentBlue}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{RuleGray}\leaders\hrule height \footrulewidth\hfill}}
+
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,linkcolor=AccentBlue,citecolor=AccentBlue,urlcolor=AccentBlue,
+  pdfauthor={Zhongjie Luo},
+  pdftitle={System Development Tools Lab 3 Report},
+  pdfsubject={Packaging, Agentic Programming, Communication, and PyTorch}
+}
+\urlstyle{same}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\crefname{table}{表}{表}
+\crefname{figure}{图}{图}
+
+\newcommand{\safeincludegraphics}[2][]{%
+  \IfFileExists{#2}{\includegraphics[#1]{#2}}{%
+    \fbox{\begin{minipage}[c][42mm][c]{0.91\linewidth}
+      \centering\sffamily\small\color{SlateGray}
+      图片预留位置\\[0.45em]
+      \texttt{\detokenize{#2}}
+    \end{minipage}}%
+  }%
+}
+\newcommand{\commandline}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\filecell}[2]{%
+  \begin{tabular}[t]{@{}r@{}}\scriptsize\texttt{#1/}\\[-0.15em]
+  \scriptsize\texttt{#2}\end{tabular}}
+
+\newcommand{\CoverInfoLabel}[1]{%
+  \parbox[c][9mm][c]{26mm}{\raggedright\bfseries\sffamily\color{DeepBlue}#1}}
+\newcommand{\CoverInfoValueLeft}[1]{%
+  \parbox[c][9mm][c]{44mm}{\raggedright\color{DeepBlue}#1}}
+\newcommand{\CoverInfoLabelRight}[1]{%
+  \parbox[c][9mm][c]{23mm}{\raggedright\bfseries\sffamily\color{DeepBlue}#1}}
+\newcommand{\CoverInfoValueRight}[1]{%
+  \parbox[c][9mm][c]{45mm}{\raggedright\color{DeepBlue}#1}}
+\newcommand{\CoverInfoRow}[4]{%
+  \noindent
+  \CoverInfoLabel{#1}\hspace{2mm}%
+  \CoverInfoValueLeft{#2}\hfill
+  \CoverInfoLabelRight{#3}\hspace{2mm}%
+  \CoverInfoValueRight{#4}\par}
+
+\begin{document}
+\ifPDFTeX\begin{CJK*}{UTF8}{gbsn}\fi
+
+\thispagestyle{fancy}
+\vspace*{8mm}
+{\sffamily\bfseries\color{AccentBlue}\large \LabDate\quad·\quad第3周}\par
+\vspace{4mm}
+{\sffamily\bfseries\color{DeepBlue}\fontsize{28}{34}\selectfont
+系统开发工具基础\par}
+\vspace{2mm}
+{\sffamily\bfseries\color{DeepBlue}\fontsize{20}{26}\selectfont
+第3周实验与课后拓展报告\par}
+\vspace{3mm}
+{\sffamily\color{SlateGray}\fontsize{13}{19}\selectfont
+Python 打包\quad·\quad智能体编程\quad·\quad工程协作\quad·\quad PyTorch\par}
+\vspace{4mm}
+\noindent{\color{AccentBlue}\rule{\linewidth}{1.2pt}}
+\vspace{9mm}
+
+\begin{infobar}
+\CoverInfoRow{姓名}{\StudentName}{学号}{\StudentID}
+\CoverInfoRow{课程}{\Programme}{指导教师}{\InstructorName}
+\CoverInfoRow{学校}{\Institution}{报告日期}{\ReportDate}
+\CoverInfoRow{实验日期}{\LabDate}{实验主题}{第3周工程交付实践}
+\vspace{1mm}
+\noindent{\color{AccentBlue!30}\rule{\linewidth}{0.5pt}}
+\vspace{1mm}
+\noindent
+\CoverInfoLabel{GitHub 仓库}\hspace{2mm}%
+\parbox[c][9mm][c]{\dimexpr\linewidth-28mm\relax}{%
+  \raggedright\href{\RepositoryURL}{\RepositoryURL}}
+\end{infobar}
+
+\clearpage
+\section{实验概述与仓库架构}
+
+第3周实验覆盖从源码到可安装产物、从失败测试到最小修复、从模糊表述到可执行协作信息，
+以及从随机初始化到可复现训练结果的完整工程链路。课堂部分完成 q09--q12；课后在
+\texttt{exercises/} 下完成 q13\_ext--q23\_ext 共 11 个实例。仓库地址为
+\href{\RepositoryURL}{System-Dev-Tools-Week3}。
+
+目录按职责划分：课堂任务位于 \texttt{q09/--q12/}，课后拓展位于
+\texttt{exercises/}；统一验证入口为 \texttt{scripts/verify\_all.ps1}，
+运行记录与报告分别保存在 \texttt{docs/} 和 \texttt{output/pdf/}。
+提交过程按题目和每 1--2 个拓展实例拆分，q10 还单独保留失败测试与修复提交，
+使“问题存在”和“修复有效”都有历史证据。
+
+\begin{figure}[H]
+  \centering
+  \safeincludegraphics[width=0.98\linewidth]{git-graph.png}
+  \caption{第3周仓库的原子化提交图谱}
+  \label{fig:git-graph}
+\end{figure}
+
+\begin{resultbox}[仓库核验]
+图\,\ref{fig:git-graph} 展示初始化、四项课堂实现、六组课后练习和统一验证提交。
+提交信息使用 Conventional Commits，且本地 \texttt{main} 与远程 \texttt{origin/main}
+保持同步。
+\end{resultbox}
+
+\clearpage
+\section{课堂任务实现（q09--q12）}
+
+\subsection{q09：从源码构建并在干净环境安装 Wheel}
+\subsubsection{任务分析}
+该题采用 \texttt{src/} 布局，发行名替换为
+\texttt{greetlab-24020007086}，并通过 \texttt{project.scripts} 把
+\texttt{sdt-greet} 映射到 \texttt{greetlab.cli:main}。验证时先运行
+\texttt{python -m build}，再把生成的 Wheel 安装到独立虚拟环境，并切换到 q09 目录之外
+执行命令，排除“直接导入当前源码”的假通过。
+
+\begin{center}\color{SlateGray}代码清单1：q09 的构建元数据与入口\end{center}
+\begin{CodeBlock}
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "greetlab-24020007086"
+version = "0.1.0"
+
+[project.scripts]
+sdt-greet = "greetlab.cli:main"
+\end{CodeBlock}
+
+\begin{resultbox}
+构建生成 \texttt{greetlab\_24020007086-0.1.0-py3-none-any.whl}。
+元数据检查得到名称 \texttt{greetlab-24020007086}、标签
+\texttt{py3-none-any} 和入口 \texttt{sdt-greet = greetlab.cli:main}。
+干净环境安装后，在源码目录外运行得到 \texttt{Hello, 24020007086!}。
+\end{resultbox}
+
+\subsection{q10：让编程智能体进入可验证的修复循环}
+\subsubsection{任务分析}
+首先复制 q09 并添加失败测试：纯空白姓名应触发 \texttt{SystemExit(2)}。
+第一次 pytest 实际输出 \texttt{Hello,    !}，并报告
+\texttt{DID NOT RAISE SystemExit}，证明缺陷确实存在。修复时仅在 CLI 中执行
+\texttt{strip()} 并调用 \texttt{parser.error()}；随后增加正常姓名回归测试，检查 diff 后复测。
+
+\begin{center}\color{SlateGray}代码清单2：q10 的失败断言与最小修复\end{center}
+\begin{CodeBlock}
+with pytest.raises(SystemExit) as error:
+    main()
+assert error.value.code == 2
+
+name = args.name.strip()
+if not name:
+    parser.error("name must not be blank")
+print(f"Hello, {name}!")
+\end{CodeBlock}
+
+\begin{resultbox}
+红灯提交 \texttt{test(q10): reproduce blank-name CLI defect} 明确保存失败阶段；
+修复提交 \texttt{fix(q10): reject blank names with verified exit status} 保存绿灯阶段。
+最终 2 项 pytest 全部通过，\texttt{ai\_log.md} 用 4 行记录提示、改动和人工验证。
+\end{resultbox}
+
+\subsection{q11：把协作材料改成可执行信息}
+\subsubsection{任务分析}
+原始描述缺少环境、复现步骤、可观察结果和行动条件。重写后的 Issue 明确记录 Windows 环境、
+复现命令、期望退出码 2 和实际退出码 0；未知 Python 与包版本标为“待确认”。提交标题采用
+祈使语气，正文说明缺陷与解决方案。评审意见标记为 \texttt{Blocking}，并同时给出行为、
+风险、建议动作和合并条件。
+
+\begin{center}\color{SlateGray}代码清单3：q11 的核心协作信息\end{center}
+\begin{CodeBlock}
+Issue: Reject blank names
+Environment: Windows; versions pending confirmation
+Reproduce: sdt-greet --name " "
+Expected: stderr and exit status 2
+Actual: Hello,  ! and exit status 0
+Review: Blocking - validate name.strip() and add a test
+\end{CodeBlock}
+
+\begin{resultbox}
+\texttt{communication.md} 共 163 个汉字，小于 400 字限制。
+课后 Issue 与 Review 检查器分别输出 \texttt{issue quality: PASS} 和
+\texttt{review quality: PASS}，说明材料不仅可读，还能被规则验证。
+\end{resultbox}
+
+\subsection{q12：修复可复现的线性回归训练循环}
+\subsubsection{任务分析}
+训练以种子 20260907 初始化 \texttt{nn.Linear(1,1)}，目标为 $y=3x-1$。
+每轮严格按“清空梯度、前向计算、反向传播、更新参数”执行；训练结束切换到
+\texttt{eval()}，在 \texttt{no\_grad()} 中计算最终损失。参数完全由 SGD 学得，
+没有直接赋值为 3 和 $-1$。
+
+\begin{center}\color{SlateGray}代码清单4：q12 的训练与评估步骤\end{center}
+\begin{CodeBlock}
+for _ in range(200):
+    prediction = model(x)
+    loss = loss_fn(prediction, y)
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+
+model.eval()
+with torch.no_grad():
+    final_loss = loss_fn(model(x), y).item()
+\end{CodeBlock}
+
+\begin{resultbox}
+CPU 实际运行输出为：
+\begin{center}\ttfamily
+final\_loss=0.00000000\\
+weight=2.999997\qquad bias=-1.000000
+\end{center}
+测试同时检查损失小于 0.001 和参数接近目标值，1 项 unittest 通过。
+\end{resultbox}
+
+\section{课后拓展练习（11 个实例）}
+
+课后练习沿着“产物可交付、修改可约束、协作可执行、训练可复现”四条主线展开。
+每个实例都有 README、独立脚本及测试或演示入口，统一由验证脚本执行。
+
+\begin{table}[H]
+\centering
+\caption{第3周课后拓展实例总览}
+\label{tab:extended}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.24}
+\begin{tabularx}{\linewidth}{@{}c p{35mm} X r@{}}
+\toprule
+编号 & 主题 & 核心技术 & 主文件 \\
+\midrule
+Ex01 & Wheel 元数据检查 & \texttt{zipfile}, METADATA, 入口 & \filecell{q13\_ext}{wheel\_inspector.py} \\
+Ex02 & 隔离安装冒烟测试 & \texttt{venv}, \texttt{pip --no-index} & \filecell{q14\_ext}{verify\_wheel.py} \\
+Ex03 & API 兼容性门禁 & AST、公共符号差集 & \filecell{q15\_ext}{api\_guard.py} \\
+Ex04 & 补丁范围门禁 & 路径归一化、允许列表 & \filecell{q16\_ext}{patch\_scope\_guard.py} \\
+Ex05 & 智能体任务契约 & JSON、目标、约束、测试 & \filecell{q17\_ext}{prompt\_contract.py} \\
+Ex06 & 有界验证循环 & 超时、重试、结构化证据 & \filecell{q18\_ext}{verified\_loop.py} \\
+Ex07 & Issue 质量门禁 & 复现要素、退出状态 & \filecell{q19\_ext}{issue\_linter.py} \\
+Ex08 & Review 质量门禁 & 级别、风险、动作、验证 & \filecell{q20\_ext}{review\_linter.py} \\
+Ex09 & 训练可复现性审计 & 固定种子、逐张量比较 & \filecell{q21\_ext}{reproducibility\_audit.py} \\
+Ex10 & 梯度诊断与裁剪 & 范数、有限值、clip & \filecell{q22\_ext}{gradient\_diagnostics.py} \\
+Ex11 & 检查点往返验证 & \texttt{state\_dict}, CPU 加载 & \filecell{q23\_ext}{checkpoint\_roundtrip.py} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{resultbox}[统一验证]
+运行 \commandline{powershell -File scripts/verify_all.ps1} 会检查 Ruff、Wheel、隔离安装、
+q10 测试、q11 协作规则、q12 训练及全部 11 个拓展实例。完整记录保存在
+\texttt{docs/verification-log.txt}，结尾为 \texttt{ALL WEEK 3 CHECKS PASSED}。
+\end{resultbox}
+
+\clearpage
+\subsection{Ex01：Wheel 元数据检查器}
+\subsubsection{实例分析}
+Wheel 本质上是带规范目录的 ZIP 文件。脚本在不安装包的情况下读取
+\texttt{METADATA}、\texttt{WHEEL} 和 \texttt{entry\_points.txt}，可在发布前发现
+发行名、版本、兼容标签或入口脚本错误。
+\begin{CodeBlock}
+with zipfile.ZipFile(path) as archive:
+    metadata = email.message_from_bytes(archive.read(metadata_name))
+    entry_points = dict(parser.items("console_scripts"))
+return {"name": metadata["Name"], "tag": wheel_metadata["Tag"]}
+\end{CodeBlock}
+\begin{resultbox}
+对 q09 Wheel 的检查结果为 7 个归档成员，名称和版本正确，标签为
+\texttt{py3-none-any}，入口准确映射到 \texttt{greetlab.cli:main}；1 项测试通过。
+\end{resultbox}
+
+\subsection{Ex02：一次性环境 Wheel 冒烟测试}
+\subsubsection{实例分析}
+脚本使用 \texttt{TemporaryDirectory} 与 \texttt{venv.EnvBuilder} 创建一次性环境，
+使用 \texttt{--no-index --no-deps} 安装指定 Wheel，再从临时目录运行控制台命令。
+测试结束后环境自动回收，不污染日常解释器。
+\begin{CodeBlock}
+venv.EnvBuilder(with_pip=True).create(root)
+subprocess.run([python, "-m", "pip", "install",
+                "--no-deps", "--no-index", wheel], check=True)
+completed = subprocess.run([command, "--name", student_id], cwd=root)
+\end{CodeBlock}
+\begin{resultbox}
+隔离环境输出 \texttt{Hello, 24020007086!}，工具报告
+\texttt{isolated install: PASS}。这证明安装产物和入口可用，而非本地源码偶然可导入。
+\end{resultbox}
+
+\clearpage
+\subsection{Ex03：公共 API 兼容性门禁}
+\subsubsection{实例分析}
+脚本用 AST 提取模块顶层且不以下划线开头的函数与类，对比发布前后的集合。
+新增符号仅报告，删除符号则返回 1，从而在构建新版本前暴露潜在破坏性变化。
+\begin{CodeBlock}
+return {node.name for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.ClassDef))
+        and not node.name.startswith("_")}
+removed = sorted(before - after)
+\end{CodeBlock}
+\begin{resultbox}
+测试样例保留 \texttt{stable}、删除 \texttt{removed}、新增 \texttt{added}，
+工具准确给出两个差集，1 项测试通过。
+\end{resultbox}
+
+\subsection{Ex04：智能体补丁范围门禁}
+\subsubsection{实例分析}
+工具先把 Windows 和 POSIX 分隔符统一，再将修改文件与允许路径前缀比较。
+这能把“只修改 q10”转化为可执行约束，防止智能体顺手改动根目录配置或其他作业。
+\begin{CodeBlock}
+prefixes = [normalize(p).rstrip("/") + "/" for p in allowed]
+if not any((path + "/").startswith(prefix) for prefix in prefixes):
+    bad.append(path)
+\end{CodeBlock}
+\begin{resultbox}
+输入两个 q10 文件和根目录 README 时，检查器只报告 \texttt{README.md} 越界；
+仅输入允许文件时输出 \texttt{patch scope: PASS}，1 项测试通过。
+\end{resultbox}
+
+\clearpage
+\subsection{Ex05：编程智能体任务契约}
+\subsubsection{实例分析}
+JSON 契约强制包含目标、约束、测试命令和允许文件。校验器还拒绝绝对路径与
+\texttt{..}，避免任务范围逃逸。相比自然语言中的“尽量少改”，这些字段可被程序检查。
+\begin{CodeBlock}
+REQUIRED = {"goal", "constraints", "test_command", "allowed_files"}
+if path.is_absolute() or ".." in path.parts:
+    errors.append(f"unsafe allowed path: {raw}")
+\end{CodeBlock}
+\begin{resultbox}
+q10 示例契约输出 \texttt{contract: PASS}；测试确认缺少测试命令且允许父目录时会同时
+报告两类错误，1 项测试通过。
+\end{resultbox}
+
+\subsection{Ex06：有界验证循环}
+\subsubsection{实例分析}
+工具为每次命令保存序号、退出码、耗时和合并输出，成功立即停止；超时转换为 124，
+尝试次数由参数限制。这样失败不会无限重试，人工也能看到每次验证发生了什么。
+\begin{CodeBlock}
+for number in range(1, attempts + 1):
+    completed = runner(command, capture_output=True, timeout=timeout)
+    history.append(Attempt(number, completed.returncode, seconds, output))
+    if completed.returncode == 0:
+        break
+\end{CodeBlock}
+\begin{resultbox}
+模拟验证依次返回 1 和 0 时只执行两次；真实命令一次成功并输出 JSON 记录
+\texttt{returncode: 0}，1 项测试通过。
+\end{resultbox}
+
+\clearpage
+\subsection{Ex07：Issue 可复现性检查}
+\subsubsection{实例分析}
+检查器要求文本出现环境、复现、期望、实际、命令和退出状态；未知环境还必须明确写
+“待确认”。它不替代人工判断，但能过滤只有情绪、没有证据的缺陷描述。
+\begin{CodeBlock}
+REQUIRED_MARKERS = ("environment", "reproduce", "expected", "actual")
+if "exit status" not in text:
+    errors.append("missing observable exit status")
+\end{CodeBlock}
+\begin{resultbox}
+q11 材料输出 \texttt{issue quality: PASS}；完整样例通过，而“Windows 上运行不了”
+会触发至少 4 项缺失提示，2 项测试通过。
+\end{resultbox}
+
+\subsection{Ex08：代码评审意见质量检查}
+\subsubsection{实例分析}
+规则要求评审包含 \texttt{Blocking}、\texttt{Suggestion} 或 \texttt{Nit} 之一，
+并明确具体风险、建议动作和验证条件。这样作者能判断优先级，也知道满足什么条件才能合并。
+\begin{CodeBlock}
+if not any(label in text for label in SEVERITIES):
+    errors.append("missing severity")
+if not has_risk or not has_action or not has_verification:
+    errors.append("review is not actionable")
+\end{CodeBlock}
+\begin{resultbox}
+q11 评审输出 \texttt{review quality: PASS}；可执行评审通过，含糊的“这里写得不好”
+会缺少级别、动作和验证条件，2 项测试通过。
+\end{resultbox}
+
+\clearpage
+\subsection{Ex09：PyTorch 可复现性审计}
+\subsubsection{实例分析}
+脚本以相同种子从头训练两次，不只比较打印值，而是使用 \texttt{torch.equal}
+逐张量比较两个 \texttt{state\_dict}，并要求最终损失完全一致。
+\begin{CodeBlock}
+first, first_loss = train_once(seed)
+second, second_loss = train_once(seed)
+exact = all(torch.equal(first[name], second[name]) for name in first)
+\end{CodeBlock}
+\begin{resultbox}
+实际输出 \texttt{exact\_state\_match: true}、\texttt{loss\_match: true}，
+两次最终损失均为 $1.5897\times10^{-7}$，1 项测试通过。
+\end{resultbox}
+
+\subsection{Ex10：梯度诊断与裁剪}
+\subsubsection{实例分析}
+在 \texttt{backward()} 后调用 \texttt{clip\_grad\_norm\_}，其返回值保留裁剪前范数，
+便于观察训练是否曾出现过大梯度；同时检查所有范数和损失均为有限值。
+\begin{CodeBlock}
+loss.backward()
+norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+observed.append(float(norm))
+optimizer.step()
+\end{CodeBlock}
+\begin{resultbox}
+初始及最大梯度范数为 14.2632，最终梯度范数约 $2.45\times10^{-6}$，
+最终损失约 $1.23\times10^{-12}$；学习到 weight 约 5、bias 约 2，1 项测试通过。
+\end{resultbox}
+
+\clearpage
+\subsection{Ex11：PyTorch 检查点往返验证}
+\subsubsection{实例分析}
+检查点同时保存模型参数、优化器状态和步数。加载时指定
+\texttt{map\_location="cpu"} 与 \texttt{weights\_only=True}，再将参数装入全新模型，
+比较加载前后完整预测张量。
+\begin{CodeBlock}
+torch.save({"model": model.state_dict(),
+            "optimizer": optimizer.state_dict(), "step": 100}, path)
+payload = torch.load(path, map_location="cpu", weights_only=True)
+restored.load_state_dict(payload["model"])
+\end{CodeBlock}
+\begin{resultbox}
+生成的临时检查点为 2133 bytes，恢复步数为 100；预测逐元素完全一致，
+最大绝对差为 0，1 项测试通过。临时目录退出后自动清理。
+\end{resultbox}
+
+\clearpage
+\section{总结与个人体会}
+
+\subsection{课堂实验（q09--q12）}
+\begin{itemize}
+  \item q09 让我认识到“源码能运行”和“软件能交付”是两回事。只有构建 Wheel、在干净环境安装、
+        并离开源码目录执行入口，才能真正证明打包边界正确。
+  \item q10 把智能体使用变成红灯、最小修复、diff 审查和绿灯复测的闭环。智能体给出的改动
+        必须接受测试与范围约束，不能只看文字解释是否合理。
+  \item q11 表明工程沟通本身也是技术产物。环境、复现命令、期望、实际、风险和动作越具体，
+        接手者越能直接执行，而不是重新猜测问题。
+  \item q12 使训练循环的状态变化更清晰：梯度必须每轮清空，评估必须关闭梯度记录，随机种子
+        和数值阈值共同构成可复现证据。
+\end{itemize}
+
+\subsection{课后练习（Ex01--Ex11）}
+\begin{itemize}
+  \item 打包类练习把 Wheel 从“生成的文件”扩展为可检查、可隔离安装、可执行验证的发布产物；
+        API 门禁进一步把兼容性风险前移到发布之前。
+  \item 智能体类练习把允许文件、任务契约、超时、重试和退出码组合成边界明确的自动化流程。
+        我体会到可靠智能体的核心不只是生成代码，而是持续产生可审阅证据。
+  \item 协作类练习将课堂写作规则变成 Issue 和 Review 检查器。自然语言不能完全自动判定，
+        但最小信息要素可以形成门禁，从而减少低质量交接。
+  \item PyTorch 类练习分别验证随机性、梯度和持久化：相同种子要逐张量一致，训练过程要监控
+        梯度有限且收敛，保存后的模型要在 CPU 上恢复出完全相同的预测。
+  \item 全部 11 个实例都由同一入口重复执行，并保留真实日志。这使结果从“曾经跑通”升级为
+        “可再次运行、可定位失败、可由他人复核”。
+\end{itemize}
+
+\vfill
+\begin{center}
+  {\color{AccentBlue}\rule{0.34\linewidth}{0.8pt}}\\[1.2em]
+  {\small\sffamily\color{SlateGray}
+  仓库核验日期：\ReportDate\quad\textbullet\quad
+  \href{\RepositoryURL}{github.com/luojierochester/System-Dev-Tools-Week3}}
+\end{center}
+
+\clearpage
+\ifPDFTeX\end{CJK*}\fi
+\end{document}
