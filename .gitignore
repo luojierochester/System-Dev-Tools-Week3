@@ -1,0 +1,37 @@
+# Python build and cache artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# Runtime, profiling, and temporary artifacts
+*.log
+*.prof
+*.pstats
+*.tmp
+tmp/
+
+# LaTeX intermediate files
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.toc
+*.synctex.gz
+*.xdv
+*.bbl
+*.blg
+
+# PDFs are generated except for the submitted report
+*.pdf
+!output/pdf/实验3.pdf
+
+# IDE-local state
+.idea/
+.vscode/
+
