@@ -1,0 +1,13 @@
+{
+  "goal": "Reject names containing only whitespace",
+  "constraints": [
+    "Preserve the sdt-greet entry point",
+    "Do not change valid-name output"
+  ],
+  "test_command": "python -m pytest -q q10/tests",
+  "allowed_files": [
+    "q10/src/greetlab/cli.py",
+    "q10/tests/test_cli.py"
+  ]
+}
+
