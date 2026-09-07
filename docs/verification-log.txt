@@ -1,0 +1,213 @@
+Week 3 verification | student=24020007086
+tools_python=C:\Users\25651\Desktop\系统开发工具基础\System-Dev-Tools-Week3\q09\.venv\Scripts\python.exe
+torch_python=C:\Users\25651\Desktop\机器视觉\课程结课设计\.venv\Scripts\python.exe
+
+===== Static checks: Ruff =====
+All checks passed!
+
+===== q09: build wheel =====
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=68
+* Getting build dependencies for wheel...
+running egg_info
+writing src\greetlab_24020007086.egg-info\PKG-INFO
+writing dependency_links to src\greetlab_24020007086.egg-info\dependency_links.txt
+writing entry points to src\greetlab_24020007086.egg-info\entry_points.txt
+writing top-level names to src\greetlab_24020007086.egg-info\top_level.txt
+reading manifest file 'src\greetlab_24020007086.egg-info\SOURCES.txt'
+writing manifest file 'src\greetlab_24020007086.egg-info\SOURCES.txt'
+* Installed build dependency versions:
+  - setuptools==84.0.0
+* Building wheel...
+running bdist_wheel
+running build
+running build_py
+creating build\lib\greetlab
+copying src\greetlab\cli.py -> build\lib\greetlab
+copying src\greetlab\__init__.py -> build\lib\greetlab
+running egg_info
+writing src\greetlab_24020007086.egg-info\PKG-INFO
+writing dependency_links to src\greetlab_24020007086.egg-info\dependency_links.txt
+writing entry points to src\greetlab_24020007086.egg-info\entry_points.txt
+writing top-level names to src\greetlab_24020007086.egg-info\top_level.txt
+reading manifest file 'src\greetlab_24020007086.egg-info\SOURCES.txt'
+writing manifest file 'src\greetlab_24020007086.egg-info\SOURCES.txt'
+installing to build\bdist.win-amd64\wheel
+running install
+running install_lib
+creating build\bdist.win-amd64\wheel
+creating build\bdist.win-amd64\wheel\greetlab
+copying build\lib\greetlab\cli.py -> build\bdist.win-amd64\wheel\.\greetlab
+copying build\lib\greetlab\__init__.py -> build\bdist.win-amd64\wheel\.\greetlab
+running install_egg_info
+Copying src\greetlab_24020007086.egg-info to build\bdist.win-amd64\wheel\.\greetlab_24020007086-0.1.0-py3.12.egg-info
+running install_scripts
+creating build\bdist.win-amd64\wheel\greetlab_24020007086-0.1.0.dist-info\WHEEL
+creating 'C:\\Users\\25651\\Desktop\\ϵͳ�������߻���\\System-Dev-Tools-Week3\\q09\\dist\\.tmp-thsnaamv\\greetlab_24020007086-0.1.0-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+adding 'greetlab/__init__.py'
+adding 'greetlab/cli.py'
+adding 'greetlab_24020007086-0.1.0.dist-info/METADATA'
+adding 'greetlab_24020007086-0.1.0.dist-info/WHEEL'
+adding 'greetlab_24020007086-0.1.0.dist-info/entry_points.txt'
+adding 'greetlab_24020007086-0.1.0.dist-info/top_level.txt'
+adding 'greetlab_24020007086-0.1.0.dist-info/RECORD'
+removing build\bdist.win-amd64\wheel
+Successfully built greetlab_24020007086-0.1.0-py3-none-any.whl
+
+===== q09: inspect wheel metadata =====
+{
+  "name": "greetlab-24020007086",
+  "version": "0.1.0",
+  "tag": "py3-none-any",
+  "entry_points": {
+    "sdt-greet": "greetlab.cli:main"
+  },
+  "file_count": 7
+}
+
+===== q09: isolated install outside source tree =====
+isolated output: Hello, 24020007086!
+isolated install: PASS
+
+===== q10: repaired CLI tests =====
+..                                                                       [100%]
+
+===== q11: communication checks =====
+issue quality: PASS
+review quality: PASS
+
+===== q12: deterministic CPU training =====
+final_loss=0.00000000
+weight=2.999997
+bias=-1.000000
+test_loss_and_parameters_converge (test_train.TrainingTest.test_loss_and_parameters_converge) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.379s
+
+OK
+
+===== extension q13_ext tests =====
+test_real_q09_wheel_metadata (test_wheel_inspector.WheelInspectorTest.test_real_q09_wheel_metadata) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.060s
+
+OK
+
+===== extension q15_ext tests =====
+test_reports_removed_and_added_symbols (test_api_guard.ApiGuardTest.test_reports_removed_and_added_symbols) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.014s
+
+OK
+
+===== extension q16_ext tests =====
+test_accepts_only_approved_directory (test_patch_scope_guard.PatchScopeTest.test_accepts_only_approved_directory) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+
+===== extension q17_ext tests =====
+test_rejects_parent_path_and_missing_test (test_prompt_contract.ContractTest.test_rejects_parent_path_and_missing_test) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+
+===== extension q18_ext tests =====
+test_stops_after_first_success (test_verified_loop.VerifiedLoopTest.test_stops_after_first_success) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+
+===== extension q19_ext tests =====
+test_complete_issue_passes (test_issue_linter.IssueLinterTest.test_complete_issue_passes) ... ok
+test_vague_issue_fails (test_issue_linter.IssueLinterTest.test_vague_issue_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+
+===== extension q20_ext tests =====
+test_actionable_review_passes (test_review_linter.ReviewLinterTest.test_actionable_review_passes) ... ok
+test_vague_review_fails (test_review_linter.ReviewLinterTest.test_vague_review_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+
+===== Ex05: prompt contract =====
+contract: PASS
+
+===== Ex06: bounded verification command =====
+[
+  {
+    "number": 1,
+    "returncode": 0,
+    "seconds": 0.07953759998781607,
+    "output": "verified"
+  }
+]
+
+===== extension q21_ext tests =====
+test_same_seed_repeats_exactly (test_reproducibility_audit.ReproducibilityTest.test_same_seed_repeats_exactly) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.389s
+
+OK
+
+===== extension q22_ext tests =====
+test_training_is_finite_and_converges (test_gradient_diagnostics.GradientDiagnosticsTest.test_training_is_finite_and_converges) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.397s
+
+OK
+
+===== extension q23_ext tests =====
+test_predictions_survive_save_and_load (test_checkpoint_roundtrip.CheckpointTest.test_predictions_survive_save_and_load) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.383s
+
+OK
+
+===== Ex09: reproducibility audit =====
+{
+  "seed": 20260907,
+  "exact_state_match": true,
+  "loss_match": true,
+  "final_loss": 1.5896972627160721e-07
+}
+
+===== Ex10: gradient diagnostics =====
+{
+  "initial_grad_norm": 14.263189315795898,
+  "maximum_grad_norm": 14.263189315795898,
+  "final_grad_norm": 2.448494797135936e-06,
+  "final_loss": 1.227294633109055e-12,
+  "weight": 4.999999046325684,
+  "bias": 1.9999996423721313
+}
+
+===== Ex11: checkpoint roundtrip =====
+{
+  "step": 100,
+  "exact_prediction_match": true,
+  "max_absolute_difference": 0.0,
+  "checkpoint_bytes": 2133
+}
+
+===== RESULT =====
+ALL WEEK 3 CHECKS PASSED
