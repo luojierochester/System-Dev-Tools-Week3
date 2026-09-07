@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .venv/
+.clean-venv/
 venv/
 build/
 dist/
@@ -34,4 +35,3 @@ tmp/
 # IDE-local state
 .idea/
 .vscode/
-
