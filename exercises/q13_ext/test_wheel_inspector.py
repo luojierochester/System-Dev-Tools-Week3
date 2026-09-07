@@ -2,6 +2,7 @@ import sys
 import unittest
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from wheel_inspector import inspect_wheel
 
 
@@ -18,4 +19,3 @@ class WheelInspectorTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
