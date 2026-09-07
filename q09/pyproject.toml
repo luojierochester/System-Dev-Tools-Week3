@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "greetlab-24020007086"
+version = "0.1.0"
+description = "Minimal command-line package for System Development Tools Week 3"
+requires-python = ">=3.9"
+
+[project.scripts]
+sdt-greet = "greetlab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
